@@ -1,4 +1,5 @@
 import express from "express";
+import authenticateToken from "../middlewares/authMiddleware.js";
 import {
   createDetailTech,
   deleteDetailTech,
@@ -10,11 +11,11 @@ import {
 
 const router = express.Router();
 
-router.post("/create", createDetailTech);
+router.post("/create", authenticateToken, createDetailTech);
 router.get("/get-all", getDetailTech);
 router.get("/get-by-id/:id", getDetailTechById);
 router.get("/get-by-tech/:id", getDetailTechByTech);
-router.put("/update/:id", updateDetailTech);
-router.delete("/delete/:id", deleteDetailTech);
+router.put("/update/:id", authenticateToken, updateDetailTech);
+router.delete("/delete/:id", authenticateToken, deleteDetailTech);
 
 export default router;
